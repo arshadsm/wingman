@@ -1,20 +1,4 @@
-Welcome to your new dbt project!
-
-### Using the starter project
-
-Try running the following commands:
-- dbt run
-- dbt test
-
-
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [dbt community](https://getdbt.com/community) to learn from other analytics engineers
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
-
-# 🚲 Ride Analytics dbt Project
+# 🚲 Wingman - Ride Analytics dbt Project
 
 This repository contains a modular and testable dbt project for analyzing ride participation data using Google BigQuery. It is designed following best practices for the modern data stack — including dimensional modeling, data quality testing, and scalable fact/dim layers.
 
@@ -24,6 +8,13 @@ This repository contains a modular and testable dbt project for analyzing ride p
 
 The project follows a layered architecture:
 
+models/
+├── staging/ # Raw-to-staging transformation
+├── intermediate/ # Joins and key generation (e.g., int_dim_user)
+├── core/ # Dimensions (e.g., dim_locations)
+├── marts/
+│ └── fact/ # Fact tables (e.g., fact_ride_participation)
+└── schema.yml # Tests and documentation
 
 ---
 
@@ -47,6 +38,24 @@ Tracks each user's participation in a ride, enriched with role, join time, and l
 - **`int_dim_user`**: Intermediate user dimension with generated surrogate keys
 
 ---
+## Requirements
+dbt-core >= 1.7
+dbt-bigquery adapter
+A profiles.yml file configured for your GCP project and BigQuery dataset
+
+### Using the starter project
+
+Try running the following commands:
+- dbt run
+- dbt test
+
+
+### Resources:
+- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
+- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
+- Join the [dbt community](https://getdbt.com/community) to learn from other analytics engineers
+- Find [dbt events](https://events.getdbt.com) near you
+- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
 
 ## ✅ Tests
 
@@ -57,3 +66,5 @@ Includes dbt schema tests for:
 Run with:
 ```bash
 dbt test
+
+
