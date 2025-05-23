@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: fact_ride_participation
+    description: >
+      Fact table tracking each participant in a ride, including join date, user role, and ride metadata.
+    columns:
+      - name: user_key
+        description: Surrogate key of the participant from int_dim_user
+        tests:
+          - not_null
+          - relationships:
+              to: ref('int_dim_user')
+              field: user_key
+
+      - name: ride_id
+        description: Foreign key to the ride
+        tests:
+          - not_null
+
+      - name: join_date_key
+        description: Date dimension key derived from join_time
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date_day
+
+      - name: exit_location_key
+        description: Foreign key to dim_locations
+        tests:
+          - relationships:
+              to: ref('dim_locations')
+              field: location_key
+
+      - name: is_creator
+        description: True if the user was the creator of the ride
+      - name: role
+        description: Role of the participant (e.g., rider, driver)
+      - name: ride_duration_seconds
+        description: Time from join_time to now, in seconds

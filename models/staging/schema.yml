@@ -1,0 +1,25 @@
+version: 2
+
+sources:
+  - name: raw
+    database: corded-imagery-436821-c2
+    schema: raw
+    tables:
+      - name: users
+      - name: rides
+      - name: participants
+      - name: community_posts
+      - name: traffic_events
+      - name: stops
+      - name: status_updates
+models:
+  - name: dim_users
+    columns:
+      - name: user_key
+        tests:
+          - not_null
+          - unique
+      - name: user_id
+        tests:
+          - not_null
+
